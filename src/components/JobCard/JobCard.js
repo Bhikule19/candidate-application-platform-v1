@@ -18,7 +18,7 @@ const JobCard = ({ data }) => {
   };
 
   return (
-    <div className="job_card_grid">
+    <div className="">
       <Card sx={{ borderRadius: 5 }}>
         <CardContent>
           <div className="job_info">

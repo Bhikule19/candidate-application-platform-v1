@@ -1,11 +1,11 @@
-.job_board_grid {
+.job_card_grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 50px;
 }
 
 @media only screen and (max-width: 900px) {
-  .job_board_grid {
+  .job_card_grid {
     grid-template-columns: 1fr;
   }
 }
