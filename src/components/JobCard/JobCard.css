@@ -1,0 +1,94 @@
+.job_info {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.info_container {
+  margin: 10px 0;
+}
+
+.info_container > h3 {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 3px;
+  color: #8b8b8b;
+}
+
+.info_container > h2 {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.cards-sub-text {
+  font-size: 11px;
+  font-weight: 500;
+  margin-top: 5px;
+}
+
+.card_salary {
+  color: rgb(77, 89, 106);
+  font-weight: 400;
+}
+
+.card_about {
+  height: 250px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    rgb(255, 255, 255),
+    rgb(255, 255, 255),
+    rgba(255, 255, 255, 0)
+  );
+  mask-image: linear-gradient(
+    rgb(255, 255, 255),
+    rgb(255, 255, 255),
+    rgba(255, 255, 255, 0)
+  );
+}
+
+.card_about_heading {
+  margin: 0px;
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.button_container {
+  flex-grow: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.button_container_buttons {
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.button_container_buttons > .button {
+  width: 100%;
+  background-color: rgb(85, 239, 196);
+  color: rgb(0, 0, 0);
+  font-weight: 500;
+  padding: 12px 18px;
+  border-radius: 8px;
+}
+
+.button_container_buttons .referral {
+  background-color: rgb(73, 67, 218);
+  color: #fff;
+  margin: 5px 0;
+  padding: 0px 20px;
+}
+
+.button_avatar_group {
+  display: flex;
+  gap: 8px;
+  -webkit-box-align: center;
+  align-items: center;
+}
