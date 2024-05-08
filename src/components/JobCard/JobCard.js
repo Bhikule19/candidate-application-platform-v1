@@ -11,9 +11,9 @@ import React from "react";
 import "./JobCard.css";
 
 const JobCard = ({ data }) => {
-  // To capitalize first letter of the string
+  // Function to capitalize the first letter of a string
   const capitalizeFirstLetter = (str) => {
-    if (!str) return "";
+    if (!str) return ""; // If str is falsy return an empty string
     return str.toString().charAt(0).toUpperCase() + str.toString().slice(1);
   };
 
