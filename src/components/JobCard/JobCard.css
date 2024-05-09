@@ -1,27 +1,60 @@
+.posted_card {
+  display: flex;
+  align-items: flex-start;
+  padding: 5px 0px;
+  flex-wrap: wrap;
+  gap: 5px;
+  width: 100%;
+  flex: 1 1 0%;
+  margin-bottom: 10px;
+}
+
+.posted_card_info {
+  padding: 4px 6px;
+  box-shadow: rgba(6, 6, 6, 0.05) 0px 2px 6px 0px;
+  border-radius: 10px;
+  border: 1px solid rgb(230, 230, 230);
+}
+
+.card_info_p {
+  font-weight: 400;
+  line-height: 1.5;
+  font-size: 10px;
+  margin: 0;
+}
+
 .job_info {
   display: flex;
   gap: 0.5rem;
+  /* justify-content: flex-start; */
 }
 
-.info_container {
-  margin: 10px 0;
+.job_info > img {
+  width: 30px;
+  height: 2.5rem;
+}
+
+.info_salary {
+  margin-bottom: 2rem;
 }
 
 .info_container > h3 {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   letter-spacing: 1px;
   margin-bottom: 3px;
   color: #8b8b8b;
+  font-family: "Lexend", sans-serif;
 }
 
 .info_container > h2 {
   font-size: 14px;
   line-height: 1.5;
+  font-family: "Lexend", sans-serif;
 }
 
 .cards-sub-text {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
   margin-top: 5px;
 }
@@ -29,28 +62,44 @@
 .card_salary {
   color: rgb(77, 89, 106);
   font-weight: 400;
-}
-
-.card_about {
-  height: 250px;
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(
-    rgb(255, 255, 255),
-    rgb(255, 255, 255),
-    rgba(255, 255, 255, 0)
-  );
-  mask-image: linear-gradient(
-    rgb(255, 255, 255),
-    rgb(255, 255, 255),
-    rgba(255, 255, 255, 0)
-  );
+  margin-bottom: 1rem;
+  margin-top: 0;
 }
 
 .card_about_heading {
-  margin: 0px;
+  /* margin: 0px; */
+  margin-top: 1rem;
   font-size: 1rem;
   line-height: 1.5;
   font-weight: 500;
+}
+
+.about_info {
+  font-weight: 600;
+  margin: 0;
+}
+
+.about_para {
+  margin: 0;
+  /* white-space: pre-wrap; */
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.show_info {
+  text-align: center;
+  margin-bottom: 0.5rem;
+  position: relative;
+  /* bottom: -20px; */
+}
+
+.show_info > button {
+  color: #4943da;
+  outline: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 14px;
 }
 
 .button_container {

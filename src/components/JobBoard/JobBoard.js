@@ -24,7 +24,6 @@ import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import ExpInput from "../ExpInput/ExpInput";
 import MinSalaryInput from "../MinSalaryInput/MinSalaryInput";
 import LocationTypeInput from "../LoctationType/LocationTypeInput";
-import TechInput from "../TechInput/TechInput";
 
 const JobBoard = () => {
   const dispatch = useDispatch();
@@ -34,7 +33,7 @@ const JobBoard = () => {
   const selectedExp = useSelector(selectSelectedExp); //Selecting selected experiance from Redux store
   const selectedSal = useSelector(selectSelectedSal); // Selecting selected salary from Redux store
   const selectedLocationType = useSelector(selectSelectedLocationType); // Selecting selected location type from Redux store
-  const [apiData, loading, error] = useInfiniteScrollAndFetch(10); //Using custom hook to fetch data and manage loading and error states, also providing the value 10 to render 10 job cards per scroll
+  const [apiData, loading, error] = useInfiniteScrollAndFetch(15); //Using custom hook to fetch data and manage loading and error states, also providing the value 10 to render 10 job cards per scroll
   const [filteredData, setFilteredData] = useState([]);
 
   useEffect(() => {
@@ -96,7 +95,7 @@ const JobBoard = () => {
   };
 
   useEffect(() => {
-    filterData(); // Call filterData function when searchTitle, selectedLocation, selectedRoles, or apiData changes
+    filterData(); // Call filterData function when searchTitle, selectedLocation, selectedRoles, and other filter values or apiData changes
   }, [
     searchTitle,
     selectedLocation,
@@ -133,19 +132,20 @@ const JobBoard = () => {
 
   return (
     <div className="job_board">
-      <input
-        type="text"
-        placeholder="Search Company Name"
-        className="input_box"
-        value={searchTitle}
-        onChange={handleSearchTitleChange}
-      />
-      <RolesInput setSelectedRoles={handleRolesChange} />
-      <LocationInput setSelectedLocation={handleLocationChange} />
-      <ExpInput setSelectedExp={handleExpChange} />
-      <MinSalaryInput setSelectedSal={handleSalaryChange} />
-      <LocationTypeInput setSelectedLocationType={handleLocationType} />
-      <TechInput />
+      <div className="seacrh_filters">
+        <RolesInput setSelectedRoles={handleRolesChange} />
+        <ExpInput setSelectedExp={handleExpChange} />
+        <LocationTypeInput setSelectedLocationType={handleLocationType} />
+        <MinSalaryInput setSelectedSal={handleSalaryChange} />
+        <LocationInput setSelectedLocation={handleLocationChange} />
+        <input
+          type="text"
+          placeholder="Search Company Name"
+          className="input_box"
+          value={searchTitle}
+          onChange={handleSearchTitleChange}
+        />
+      </div>
       {error && <div>Error: {error}</div>}
       {loading && <JobCardSkeleton />}
       {!loading &&

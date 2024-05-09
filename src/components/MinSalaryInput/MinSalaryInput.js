@@ -27,7 +27,7 @@ const MinSalaryInput = ({ setSelectedSal }) => {
       options={options}
       onChange={handleChange}
       isMulti={true}
-      placeholder="Min Salary pay"
+      placeholder="Minimum Base Pay Salary"
     />
   );
 };
