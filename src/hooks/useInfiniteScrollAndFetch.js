@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { API_REQUESTOPTIONS } from "../utils/constants";
+import { getSampleJdJSON } from "../utils/constants";
 
 const useInfiniteScrollAndFetch = () => {
   const [apiData, setApiData] = useState([]);
@@ -10,15 +10,10 @@ const useInfiniteScrollAndFetch = () => {
   const fetchApiData = async () => {
     try {
       setLoading(true);
-      const response = await fetch(
-        "https://api.weekday.technology/adhoc/getSampleJdJSON",
-        {
-          ...API_REQUESTOPTIONS,
-          body: JSON.stringify({ ...API_REQUESTOPTIONS.body, offset }),
-        }
-      );
-      const json = await response.json();
-      setApiData((prevData) => [...prevData, ...json.jdList]);
+      // fetching data from the provided function
+      const response = await getSampleJdJSON();
+      const jsonData = response.filter(Boolean); // Filtering out empty objects
+      setApiData((prevData) => [...prevData, ...jsonData]);
       setLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);

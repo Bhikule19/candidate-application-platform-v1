@@ -2,7 +2,7 @@ import React from "react";
 import Select from "react-select";
 
 const options = [
-  { value: "delhi", label: "Delhi" },
+  { value: "delhi ncr", label: "Delhi NCR " },
   { value: "mumbai", label: "Mumbai" },
   { value: "bangalore", label: "Bangalore" },
   { value: "chennai", label: "Chennai" },
