@@ -21,12 +21,13 @@ const JobBoard = () => {
   const searchTitle = useSelector(selectSearchTitle); // Selecting search title from Redux store
   const selectedLocation = useSelector(selectSelectedLocation); // Selecting selected location from Redux store
   const selectedRoles = useSelector(selectSelectedRoles); // Selecting selected roles from Redux store
-  const [apiData, loading, error] = useInfiniteScrollAndFetch(); //Using custom hook to fetch data and manage loading and error states
+  const [apiData, loading, error] = useInfiniteScrollAndFetch(10); //Using custom hook to fetch data and manage loading and error states, also providing the value 10 to render 10 job cards per scroll
   const [filteredData, setFilteredData] = useState([]);
 
   useEffect(() => {
     setFilteredData(apiData); // Update filtered data when apiData changes
   }, [apiData]);
+  console.log(apiData);
 
   // Filtering jobs based on user input from provided filters and search
   const filterData = () => {

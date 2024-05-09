@@ -27,7 +27,12 @@ const RolesInput = ({ setSelectedRoles }) => {
 
   return (
     <div>
-      <Select options={groupedOptions} onChange={handleChange} isMulti={true} />
+      <Select
+        options={groupedOptions}
+        onChange={handleChange}
+        isMulti={true}
+        placeholder={"Roles"}
+      />
     </div>
   );
 };
