@@ -1,70 +1,109 @@
-# Getting Started with Create React App
+# Candidate Application Platform
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a React-based job board application that allows users to search and filter job listings based on various criteria such as job roles, locations, experience levels, and salary ranges. The application fetches job data from a provided API and displays the results in a grid format with infinite scrolling functionality.
 
-## Available Scripts
+![](./src/assets/App.gif)
+**Desktop View**
 
-In the project directory, you can run:
+> ## 🚀 [Deployed Link](https://candidate-application-platform-v1.vercel.app/) - Click here for live preview
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Search for jobs by company name
+- Filter jobs by roles, locations, experience levels, salary - ranges, and location types (remote, in-office, hybrid)
+- Infinite scrolling to load more job listings as the user scrolls down
+- Responsive design for various screen sizes
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Technologies Used
 
-### `npm test`
+- React
+- React Redux (Redux Toolkit)
+- react-select
+- Material-UI
+- CSS
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Getting Started
 
-### `npm run build`
+### To run the application locally, follow these steps:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 1. Clone the repository:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+> git clone https://github.com/Bhikule19/candidate-application-platform-v1
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 2. Install dependencies:
 
-### `npm run eject`
+> cd job-board
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+> npm install
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 3. Start the development server:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+> npm start
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Dependencies
 
-## Learn More
+The following dependencies are required to run the application:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- React
+- React Redux
+- @reduxjs/toolkit (^1.9.3)
+- react-select
+- @mui/material (^5.11.12)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+You can install these dependencies by running the following command:
 
-### Code Splitting
+> npm install react react-dom react-scripts @reduxjs/toolkit react-redux react-select @mui/material @emotion/react @emotion/styled
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Functions and Components
 
-### Analyzing the Bundle Size
+The application is built using React and follows a component-based architecture. The main functionality is divided into separate components, each responsible for a specific task.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 1. **JobBoard** Component:
 
-### Making a Progressive Web App
+- This is the main component that serves as the container for the entire job board.
+- It manages the application state using React Redux and the _jobSlice_ reducer.
+- It handles user input from various filters (roles, locations, experience, salary, location type) and updates the corresponding state using Redux actions.
+- It filters the job data based on the selected filters and search input.
+- It renders the filtered job data using the _JobCard_ component.
+- It implements infinite scrolling functionality using the _useInfiniteScrollAndFetch_ custom hook to fetch and update job data as the user scrolls.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### 2. **JobCard** Component:
 
-### Advanced Configuration
+- This component is responsible for rendering individual job listing cards.
+- It displays the job details such as company name, job role, location, estimated salary range, job description, minimum experience required, and application/referral buttons.
+- It implements functionality to expand/collapse the job description text and apply styling accordingly.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### 3. **RolesInput, LocationInput, ExpInput, MinSalaryInput, LocationTypeInput, TechInput** Component:
 
-### Deployment
+- These components provide dropdown menus for users to select various filters (roles, locations, experience levels,Tech stack, salary ranges, location types).
+- They use the react-select library to render the dropdown menus.
+- They handle user selections and update the corresponding state in the JobBoard component using Redux actions.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### 4. **JobCardSkeleton** Component:
 
-### `npm run build` fails to minify
+- This component is responsible for rendering a shimmer effect (loading skeleton) while job data is being fetched.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### 5. **useInfiniteScrollAndFetch** Custom Hook:
+
+- This custom hook implements the infinite scrolling functionality.
+- It fetches job data from the provided API and manages the loading and error states.
+- It returns the fetched job data, loading state, and error state to be used in the _JobBoard_ component.
+
+### 6. **Redux Store and Reducers:**
+
+- The application state is managed using Redux and the Redux Toolkit library.
+- The _jobSlice_ reducer handles state updates related to job filters, search input, and selected options.
+- The Redux store is configured in the _store.js_ file.
+
+The application follows a modular approach, where each component is responsible for a specific functionality. The components communicate with each other through props and Redux state management. The custom hook useInfiniteScrollAndFetch is used to implement the infinite scrolling functionality and fetch job data as needed.
+
+### 7. Responsive Design
+
+The application is designed to be responsive and provide an optimal viewing experience across different devices and screen sizes. This is achieved through the use of CSS media queries and responsive design techniques.
+
+> Tablet View:
+> ![](./src/assets/Responsive.png)
+
+> Mobile View:
+>
+> ![](./src/assets/Mobile-responsive.png)
