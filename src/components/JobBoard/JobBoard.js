@@ -10,17 +10,30 @@ import {
   selectSelectedLocation,
   setSelectedRoles,
   selectSelectedRoles,
+  setSelectedExp,
+  selectSelectedExp,
+  setSelectedSal,
+  selectSelectedSal,
+  setSelectedLocationType,
+  selectSelectedLocationType,
 } from "../../redux/jobSlice";
 import JobCardSkeleton from "../ShimmerUI/JobCardSkeleton";
 import "./JobBoard.css";
 import useInfiniteScrollAndFetch from "../../hooks/useInfiniteScrollAndFetch";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import ExpInput from "../ExpInput/ExpInput";
+import MinSalaryInput from "../MinSalaryInput/MinSalaryInput";
+import LocationTypeInput from "../LoctationType/LocationTypeInput";
+import TechInput from "../TechInput/TechInput";
 
 const JobBoard = () => {
   const dispatch = useDispatch();
   const searchTitle = useSelector(selectSearchTitle); // Selecting search title from Redux store
   const selectedLocation = useSelector(selectSelectedLocation); // Selecting selected location from Redux store
   const selectedRoles = useSelector(selectSelectedRoles); // Selecting selected roles from Redux store
+  const selectedExp = useSelector(selectSelectedExp); //Selecting selected experiance from Redux store
+  const selectedSal = useSelector(selectSelectedSal); // Selecting selected salary from Redux store
+  const selectedLocationType = useSelector(selectSelectedLocationType); // Selecting selected location type from Redux store
   const [apiData, loading, error] = useInfiniteScrollAndFetch(10); //Using custom hook to fetch data and manage loading and error states, also providing the value 10 to render 10 job cards per scroll
   const [filteredData, setFilteredData] = useState([]);
 
@@ -47,12 +60,52 @@ const JobBoard = () => {
       );
     }
 
+    // Filter jobs based on selected experience levels
+    if (selectedExp.length > 0) {
+      filteredJobs = filteredJobs.filter((job) =>
+        // Check if any selected experience level includes or is less than the job's minimum experience
+        selectedExp.some((exp) => job.minExp <= exp)
+      );
+    }
+
+    if (selectedSal.length > 0) {
+      filteredJobs = filteredJobs.filter((job) =>
+        //Include jobs with salaries that are either equal to or less than twice the minimum salary and Exclude jobs with salaries more than twice the minimum salary.
+        selectedSal.some(
+          (salary) =>
+            (job.minJdSalary === null || job.minJdSalary * 2 >= salary) &&
+            job.maxJdSalary <= salary * 2
+        )
+      );
+    }
+
+    if (selectedLocationType.length > 0) {
+      filteredJobs = filteredJobs.filter((job) => {
+        if (selectedLocationType.includes("remote")) {
+          return job.location.toLowerCase() === "remote";
+        } else if (selectedLocationType.includes("in-office")) {
+          return job.location.toLowerCase() !== "remote";
+        } else if (selectedLocationType.includes("hybrid")) {
+          return job.location.toLowerCase() === "hybrid";
+        }
+        return true;
+      });
+    }
+
     setFilteredData(filteredJobs);
   };
 
   useEffect(() => {
     filterData(); // Call filterData function when searchTitle, selectedLocation, selectedRoles, or apiData changes
-  }, [searchTitle, selectedLocation, selectedRoles, apiData]);
+  }, [
+    searchTitle,
+    selectedLocation,
+    selectedRoles,
+    selectedExp,
+    selectedSal,
+    selectedLocationType,
+    apiData,
+  ]);
 
   const handleSearchTitleChange = (e) => {
     dispatch(setSearchTitle(e.target.value));
@@ -66,6 +119,18 @@ const JobBoard = () => {
     dispatch(setSelectedRoles(roles));
   };
 
+  const handleExpChange = (exp) => {
+    dispatch(setSelectedExp(exp));
+  };
+
+  const handleSalaryChange = (sal) => {
+    dispatch(setSelectedSal(sal));
+  };
+
+  const handleLocationType = (location) => {
+    dispatch(setSelectedLocationType(location));
+  };
+
   return (
     <div className="job_board">
       <input
@@ -77,6 +142,10 @@ const JobBoard = () => {
       />
       <RolesInput setSelectedRoles={handleRolesChange} />
       <LocationInput setSelectedLocation={handleLocationChange} />
+      <ExpInput setSelectedExp={handleExpChange} />
+      <MinSalaryInput setSelectedSal={handleSalaryChange} />
+      <LocationTypeInput setSelectedLocationType={handleLocationType} />
+      <TechInput />
       {error && <div>Error: {error}</div>}
       {loading && <JobCardSkeleton />}
       {!loading &&
